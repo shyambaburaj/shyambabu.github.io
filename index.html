@@ -1,19 +1,335 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shyam Babu — DevOps Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --muted:#94a3b8;
+      --accent:#ff7f11; /* orange */
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#061018 0%, #071427 100%);color:#e6eef6}
+    a{color:var(--accent);text-decoration:none}
+
+    /* Layout */
+    .wrap{max-width:1100px;margin:36px auto;padding:24px;display:grid;grid-template-columns:320px 1fr;gap:28px}
+    @media (max-width:900px){.wrap{grid-template-columns:1fr;padding:16px} .sidebar{order:2} .main{order:1}}
+
+    /* Sidebar */
+    .sidebar{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,0.04)}
+    .photo{width:100%;height:320px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,var(--accent),#ff9f40);display:flex;align-items:center;justify-content:center}
+    .photo img{width:100%;height:100%;object-fit:cover}
+    h1{font-size:22px;margin:14px 0 6px}
+    .role{color:var(--muted);font-size:13px;margin-bottom:14px}
+    .contact{font-size:14px;color:var(--muted)}
+    .contact div{margin:6px 0}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));padding:14px;border-radius:12px;margin-top:16px;border:1px solid rgba(255,255,255,0.02)}
+
+    .skills-tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+    .tile{background:var(--glass);padding:8px;border-radius:8px;text-align:center;font-weight:600;color:var(--accent)}
+
+    /* Main */
+    .main{padding:18px;border-radius:14px}
+    .hero{display:flex;gap:18px;align-items:flex-start}
+    .hero .intro{flex:1}
+    .hero h2{margin:0;font-size:28px}
+    .hero p{color:var(--muted);line-height:1.6}
+    .cta{margin-top:14px}
+    .btn{display:inline-block;padding:10px 14px;background:var(--accent);color:#071427;border-radius:10px;font-weight:700}
+    .ghost{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);color:var(--muted);margin-left:10px}
+
+    /* Skills section */
+    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    @media (max-width:900px){.skills-grid{grid-template-columns:repeat(2,1fr)}}
+    .skill{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;gap:12px}
+    .meter{width:120px;height:120px;border-radius:12px;background:linear-gradient(180deg,#071427,#081726);display:flex;align-items:center;justify-content:center;position:relative}
+    .meter svg{transform:rotate(-90deg)}
+    .meter .pct{position:absolute;font-weight:700;font-size:18px}
+    .skill-info{flex:1}
+    .skill-info h4{margin:0 0 6px}
+    .skill-info p{margin:0;color:var(--muted);font-size:13px}
+
+    /* Projects */
+    .projects{margin-top:22px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    @media (max-width:900px){.projects{grid-template-columns:1fr}}
+    .project{background:var(--card);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);transition:transform .18s ease,box-shadow .18s ease}
+    .project:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(2,6,23,0.6)}
+    .project h3{margin:0 0 8px}
+    .meta{font-size:13px;color:var(--muted);margin-bottom:8px}
+
+    /* timeline / experience */
+    .timeline{margin-top:18px}
+    .timeline-item{display:flex;gap:12px;margin-bottom:12px}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:6px}
+    .exp{color:var(--muted);font-size:14px}
+
+    /* footer */
+    .foot{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* Animations */
+    .hidden{opacity:0;transform:translateY(6px)}
+    .reveal{opacity:1;transform:none;transition:all .7s cubic-bezier(.2,.9,.2,1)}
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Hi, I'm Shyam Babu</h1>
-    <p>DevOps Engineer | Cloud Enthusiast</p>
-  </header>
-  <section>
-    <h2>About Me</h2>
-    <p>This is my portfolio hosted on GitHub Pages!</p>
-  </section>
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="photo">
+        <!-- Replace profile.jpg with your image -->
+        <img src="profile.jpg" alt="Shyam Babu">
+      </div>
+      <h1>SHYAM BABU</h1>
+      <div class="role">Senior DevOps & Site Reliability Engineer</div>
+      <div class="contact card">
+        <div style="font-weight:700">Contact</div>
+        <div class="contact">📧 <a href="mailto:shyambabu026@gmail.com">shyambabu026@gmail.com</a></div>
+        <div class="contact">📞 +91 95262 41920</div>
+        <div class="contact">📍 Bangalore, India</div>
+      </div>
+
+      <div class="card">
+        <div style="font-weight:700;margin-bottom:8px">Core Skills (Categories)</div>
+        <div class="skills-tiles">
+          <div class="tile">Cloud & Infra</div>
+          <div class="tile">CI/CD</div>
+          <div class="tile">Monitoring</div>
+          <div class="tile">Scripting</div>
+        </div>
+        <div style="margin-top:12px;font-size:13px;color:var(--muted)">Download resume:</div>
+        <div style="margin-top:8px"><a class="btn" href="resume.pdf" download>Resume (PDF)</a></div>
+      </div>
+
+      <div class="card timeline">
+        <div style="font-weight:700;margin-bottom:8px">Experience</div>
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div>
+            <div style="font-weight:700">Securonix</div>
+            <div class="exp">Senior DevOps Engineer — Feb 2017 to Present</div>
+          </div>
+        </div>
+        <div style="margin-top:8px;color:var(--muted);font-size:13px">MCA — Kannur University (2016)</div>
+      </div>
+
+      <div class="card foot">© 2025 • Shyam Babu</div>
+    </aside>
+
+    <main class="main">
+      <section class="hero card hidden" id="intro">
+        <div class="intro">
+          <h2>Hi, I'm Shyam — I build reliable cloud platforms & automation</h2>
+          <p class="desc">I design and operate scalable infrastructure, build CI/CD pipelines, and implement monitoring and disaster recovery for large-scale distributed systems. My work focuses on AWS, Terraform, Ansible, Jenkins, Prometheus, and automation using Python & Bash.</p>
+          <div class="cta">
+            <a class="btn" href="#projects">View Projects</a>
+            <a class="ghost" href="mailto:shyambabu026@gmail.com">Contact Me</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="card hidden" id="skillsSection">
+        <h3 style="margin:0 0 12px;color:var(--accent);">Skill Proficiency</h3>
+        <div class="skills-grid">
+          <!-- AWS -->
+          <div class="skill">
+            <div class="meter" data-value="95">
+              <svg width="96" height="96">
+                <circle cx="48" cy="48" r="40" stroke="rgba(255,255,255,0.06)" stroke-width="12" fill="none"></circle>
+                <circle class="arc" cx="48" cy="48" r="40" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" fill="none" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+              </svg>
+              <div class="pct">95%</div>
+            </div>
+            <div class="skill-info">
+              <h4>AWS</h4>
+              <p>Cloud architecture, VPC, EC2, RDS, Lambda, Cross-region DR</p>
+            </div>
+          </div>
+
+          <!-- Terraform -->
+          <div class="skill">
+            <div class="meter" data-value="90">
+              <svg width="96" height="96">
+                <circle cx="48" cy="48" r="40" stroke="rgba(255,255,255,0.06)" stroke-width="12" fill="none"></circle>
+                <circle class="arc" cx="48" cy="48" r="40" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" fill="none" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+              </svg>
+              <div class="pct">90%</div>
+            </div>
+            <div class="skill-info">
+              <h4>Terraform</h4>
+              <p>IaC, modules, state management, multi-account automation</p>
+            </div>
+          </div>
+
+          <!-- Ansible -->
+          <div class="skill">
+            <div class="meter" data-value="85">
+              <svg width="96" height="96">
+                <circle cx="48" cy="48" r="40" stroke="rgba(255,255,255,0.06)" stroke-width="12" fill="none"></circle>
+                <circle class="arc" cx="48" cy="48" r="40" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" fill="none" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+              </svg>
+              <div class="pct">85%</div>
+            </div>
+            <div class="skill-info">
+              <h4>Ansible</h4>
+              <p>Playbooks, roles, inventory automation, AMI baking with Packer</p>
+            </div>
+          </div>
+
+          <!-- Jenkins -->
+          <div class="skill">
+            <div class="meter" data-value="90">
+              <svg width="96" height="96">
+                <circle cx="48" cy="48" r="40" stroke="rgba(255,255,255,0.06)" stroke-width="12" fill="none"></circle>
+                <circle class="arc" cx="48" cy="48" r="40" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" fill="none" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+              </svg>
+              <div class="pct">90%</div>
+            </div>
+            <div class="skill-info">
+              <h4>Jenkins</h4>
+              <p>Pipelines, multibranch, infra as code jobs, automated testing integration</p>
+            </div>
+          </div>
+
+          <!-- Monitoring -->
+          <div class="skill">
+            <div class="meter" data-value="85">
+              <svg width="96" height="96">
+                <circle cx="48" cy="48" r="40" stroke="rgba(255,255,255,0.06)" stroke-width="12" fill="none"></circle>
+                <circle class="arc" cx="48" cy="48" r="40" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" fill="none" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+              </svg>
+              <div class="pct">85%</div>
+            </div>
+            <div class="skill-info">
+              <h4>Prometheus & Grafana</h4>
+              <p>Exporters, alerting rules, dashboards, Alertmanager</p>
+            </div>
+          </div>
+
+          <!-- Docker/K8s -->
+          <div class="skill">
+            <div class="meter" data-value="75">
+              <svg width="96" height="96">
+                <circle cx="48" cy="48" r="40" stroke="rgba(255,255,255,0.06)" stroke-width="12" fill="none"></circle>
+                <circle class="arc" cx="48" cy="48" r="40" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" fill="none" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+              </svg>
+              <div class="pct">75%</div>
+            </div>
+            <div class="skill-info">
+              <h4>Docker & Kubernetes</h4>
+              <p>Containerization, EKS, deployments, helm charts</p>
+            </div>
+          </div>
+
+          <!-- Python -->
+          <div class="skill">
+            <div class="meter" data-value="80">
+              <svg width="96" height="96">
+                <circle cx="48" cy="48" r="40" stroke="rgba(255,255,255,0.06)" stroke-width="12" fill="none"></circle>
+                <circle class="arc" cx="48" cy="48" r="40" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" fill="none" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+              </svg>
+              <div class="pct">80%</div>
+            </div>
+            <div class="skill-info">
+              <h4>Python</h4>
+              <p>Automation scripts, exporters, tooling, data sync</p>
+            </div>
+          </div>
+
+          <!-- Bash -->
+          <div class="skill">
+            <div class="meter" data-value="85">
+              <svg width="96" height="96">
+                <circle cx="48" cy="48" r="40" stroke="rgba(255,255,255,0.06)" stroke-width="12" fill="none"></circle>
+                <circle class="arc" cx="48" cy="48" r="40" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" fill="none" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+              </svg>
+              <div class="pct">85%</div>
+            </div>
+            <div class="skill-info">
+              <h4>Bash</h4>
+              <p>Scripting for orchestration and automation</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="projects" class="card hidden">
+        <h3 style="color:var(--accent);margin-top:0">Highlighted Projects</h3>
+        <div class="projects">
+          <div class="project">
+            <h3>Distributed Test System</h3>
+            <div class="meta">Jenkins, EKS, Tomcat, Hadoop</div>
+            <p>Created Jenkins pipeline to dynamically create all components of the Tomcat application in EKS with dependent Hadoop ecosystem components within 15 minutes. Ensured zero downtime during upgrades and enabled one-click destroy for tenants. Integrated with CI/CD for automated testing.</p>
+          </div>
+          <div class="project">
+            <h3>Disaster Recovery</h3>
+            <div class="meta">Terraform, RDS, ElastiCache, S3, Lambda</div>
+            <p>Built cross-region DR automation using Terraform and Jenkins, automated backups for Redis and Solr, and implemented snapshot-based recovery for RDS and ElastiCache.</p>
+          </div>
+          <div class="project">
+            <h3>Monitoring & Observability</h3>
+            <div class="meta">Prometheus, Grafana, Exporters</div>
+            <p>Configured Prometheus + Grafana stack, created custom exporters for Hadoop components, and implemented alerting & escalation via Alertmanager.</p>
+          </div>
+          <div class="project">
+            <h3>Zesty Disk Migration</h3>
+            <div class="meta">EMR, Terraform, Jenkins</div>
+            <p>Migrated EMR storage to Zesty-managed volumes with automated snapshot lifecycle and zero data loss migration scripts.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card hidden" style="margin-top:18px">
+        <h3 style="color:var(--accent);margin-top:0">More</h3>
+        <p class="meta">Tools & Platforms</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+          <span class="tile" style="background:var(--glass);padding:8px 10px;border-radius:8px;color:var(--muted)">GitLab</span>
+          <span class="tile" style="background:var(--glass);padding:8px 10px;border-radius:8px;color:var(--muted)">Bitbucket</span>
+          <span class="tile" style="background:var(--glass);padding:8px 10px;border-radius:8px;color:var(--muted)">CloudWatch</span>
+          <span class="tile" style="background:var(--glass);padding:8px 10px;border-radius:8px;color:var(--muted)">MySQL</span>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.hidden');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('reveal');io.unobserve(e.target)}}),{threshold:0.12}
+    );
+    revealEls.forEach(el=>io.observe(el));
+
+    // Animate circular meters
+    function animateMeters(){
+      document.querySelectorAll('.meter').forEach(m=>{
+        const val = Number(m.getAttribute('data-value'))||0;
+        const arc = m.querySelector('.arc');
+        const pct = m.querySelector('.pct');
+        const circumference = 2*Math.PI*40; // r=40
+        const offset = circumference * (1 - val/100);
+        arc.style.transition = 'stroke-dashoffset 1s cubic-bezier(.2,.9,.2,1)';
+        setTimeout(()=>{arc.style.strokeDashoffset = offset; pct.style.opacity=1},200);
+      });
+    }
+    // Start when skills section visible
+    const skillsSection = document.getElementById('skillsSection');
+    const skillsObserver = new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){animateMeters();skillsObserver.disconnect()}})},{threshold:0.25});
+    if(skillsSection) skillsObserver.observe(skillsSection);
+
+    // Initialize dasharray for arcs
+    document.querySelectorAll('.arc').forEach(a=>{const circumference=2*Math.PI*40; a.style.strokeDasharray= String(circumference); a.style.strokeDashoffset=String(circumference);});
+
+    // simple smooth scrolling for nav
+    document.querySelectorAll('nav a').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const id=a.getAttribute('href').substring(1);document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'})})});
+  </script>
 </body>
 </html>
